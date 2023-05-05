@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hangman Game</title>
+    <!-- -----------------------normalizer css code-------------------- -->
+    <link rel="stylesheet" href="css/normalizer.css" />
+    <!-- -----------------------webfont css code-------------------- -->
+    <link rel="stylesheet" href="css/all.min.css" />
+    <!-- -----------------------my css code-------------------- -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- ---------------------------js file--------------------- -->
+  </head>
+  <body>
+    <div class="gameStart">
+      <p class="greeting">welcome to the hangMan game</p>
+      <div>
+        <input
+          type="text"
+          list="category"
+          class="categ"
+          placeholder="Please Choose Your Category"
+        />
+        <datalist id="category"> </datalist>
+      </div>
+      <button class="startBtn">start</button>
+    </div>
+    <div class="infoContainer">
+      <div class="name"></div>
+      <div class="category">category:<span class="chosenCategory"></span></div>
+    </div>
+    <div class="gameContainer">
+      <div class="hangmanDraw">
+        <div class="base wrong"></div>
+        <div class="vBar wrong"></div>
+        <div class="hBar wrong"></div>
+        <div class="hanged wrong"></div>
+        <div class="hanged1 wrong"></div>
+        <div class="head wrong"></div>
+        <div class="neck wrong"></div>
+        <div class="hands wrong"></div>
+        <div class="foots wrong"></div>
+      </div>
+      <div class="letters"></div>
+    </div>
+    <div class="result">
+      <p class="firstLetter"></p>
+      <div class="wordtoGeuss"></div>
+    </div>
+    <audio src="audio/fail.mp3" preload="auto" class="fail"></audio>
+    <audio src="audio/succes.mp3" preload="auto" class="success"></audio>
+    <audio src="audio/lost.mp3" preload="auto" class="lost"></audio>
+    <audio src="audio/won.mp3" preload="auto" class="won"></audio>
+
+    <script src="index.js"></script>
+  </body>
+</html>

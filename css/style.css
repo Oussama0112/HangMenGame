@@ -1,0 +1,348 @@
+:root {
+  --hangman-clr: #222;
+  --clr: #003eff;
+}
+/* css reset */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+}
+/*
+    3. Allow percentage-based heights in the application
+  */
+html,
+body {
+  height: 100%;
+}
+/*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
+  padding-top: 1px;
+}
+/*
+    6. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+    7. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+    8. Avoid text overflows
+  */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/* ----------------main css code -----------------*/
+.gameStart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  z-index: 5000;
+  background-color: rgb(26 23 23 / 50%);
+  box-shadow: 0 0 10em 10em var(--hangman-clr) inset;
+  text-transform: capitalize;
+  font-size: 2rem;
+}
+.gameStart .greeting {
+  color: #777;
+  text-align: center;
+}
+.gameStart input[class="categ"] {
+  font-size: 1.5rem;
+  display: block;
+  margin: 20px auto;
+  width: 447px;
+  border-radius: 0.3em;
+  border: none;
+  padding: 0.2em 0.4em;
+  caret-color: var(--hangman-clr);
+}
+.gameStart input[class="categ"]:focus {
+  outline: none;
+}
+.gameStart input[class="categ"]:focus::placeholder {
+  opacity: 0;
+}
+
+.gameStart .startBtn {
+  border: 0.1em solid white;
+  padding: 0.2em;
+  border-radius: 0.3em;
+  background-color: #ff0000;
+  color: white;
+  text-transform: capitalize;
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+  transition: background-color 0.5s;
+}
+.gameStart .startBtn:hover {
+  background-color: #ff00004a;
+}
+.infoContainer {
+  width: 800px;
+  border: 5px solid var(--clr);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  padding: 0.3em;
+  border-radius: 0.5em;
+}
+.infoContainer .category .chosenCategory {
+  font-weight: 700;
+  color: var(--clr);
+}
+.gameContainer {
+  width: 800px;
+  display: flex;
+  margin: 10px auto;
+  border-radius: 0.5em;
+  background-color: #fafafa;
+}
+.gameContainer .hangmanDraw {
+  flex: 1;
+  --left-position: 30%;
+  --bar-thikness: 5px;
+  --brdr-raduis: 100vw;
+  --bottom: 350px;
+  --btm: 100px;
+  --hanged-btm: calc(var(--bottom) - var(--btm));
+  --hanged-lft: calc(var(--left-position) + 130px);
+  position: relative;
+  background: #f1f3f5;
+  box-shadow: 3px 0px 4px var(--hangman-clr);
+  border-radius: 0.5em;
+  min-height: 400px;
+}
+/* ---------the hangman draw -------- */
+.gameContainer .hangmanDraw .base {
+  width: 100px;
+  height: 10px;
+  background: var(--hangman-clr);
+  border-top-left-radius: var(--brdr-raduis);
+  border-top-right-radius: var(--brdr-raduis);
+  position: absolute;
+  bottom: 10px;
+  left: var(--left-position);
+  transform: translateX(-50%);
+  display: none;
+}
+.gameContainer .hangmanDraw .vBar {
+  width: var(--bar-thikness);
+  height: 370px;
+  background: var(--hangman-clr);
+  position: absolute;
+  left: var(--left-position);
+  transform: translateX(-50%);
+  bottom: 10px;
+  border-top-left-radius: var(--brdr-raduis);
+  border-top-right-radius: var(--brdr-raduis);
+  display: none;
+}
+.gameContainer .hangmanDraw .hBar {
+  width: 200px;
+  height: var(--bar-thikness);
+  background: var(--hangman-clr);
+  position: absolute;
+  left: var(--left-position);
+  bottom: var(--bottom);
+  border-top-right-radius: var(--brdr-raduis);
+  border-bottom-right-radius: var(--brdr-raduis);
+  display: none;
+}
+.gameContainer .hangmanDraw .hanged {
+  width: var(--bar-thikness);
+  height: calc(var(--btm) - 60px);
+  background-color: var(--hangman-clr);
+  position: absolute;
+  bottom: calc(var(--hanged-btm) + 60px);
+  left: var(--hanged-lft);
+  transform: translateX(-50%);
+  display: none;
+}
+.gameContainer .hangmanDraw .hanged1 {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: var(--bar-thikness) solid var(--hangman-clr);
+  position: absolute;
+  left: var(--hanged-lft);
+  bottom: var(--hanged-btm);
+  transform: translateX(-50%);
+  display: none;
+}
+.gameContainer .hangmanDraw .head {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: var(--bar-thikness) solid var(--hangman-clr);
+  position: absolute;
+  left: var(--hanged-lft);
+  bottom: calc(var(--hanged-btm) + 10px);
+  transform: translateX(-50%);
+  z-index: 2;
+  display: none;
+}
+.gameContainer .hangmanDraw .neck {
+  width: var(--bar-thikness);
+  height: 150px;
+  background: var(--hangman-clr);
+  position: absolute;
+  left: var(--hanged-lft);
+  transform: translateX(-50%);
+  bottom: calc(var(--hanged-btm) - 140px);
+  display: none;
+}
+.gameContainer .hangmanDraw .hands {
+  display: none;
+}
+.gameContainer .hangmanDraw .hands:before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: var(--bar-thikness);
+  background: var(--hangman-clr);
+  position: absolute;
+  left: 192px;
+  bottom: 205px;
+  transform: rotate(38deg);
+}
+.gameContainer .hangmanDraw .hands::after {
+  content: "";
+  width: 60px;
+  height: var(--bar-thikness);
+  background: var(--hangman-clr);
+  position: absolute;
+  left: 238px;
+  bottom: 205px;
+  transform: rotate(-38deg);
+}
+
+.gameContainer .hangmanDraw .foots {
+  display: none;
+}
+.gameContainer .hangmanDraw .foots::after {
+  content: "";
+  width: 60px;
+  height: var(--bar-thikness);
+  background: var(--hangman-clr);
+  position: absolute;
+  left: 192px;
+  bottom: 92px;
+  transform: rotate(-38deg);
+}
+.gameContainer .hangmanDraw .foots::before {
+  content: "";
+  width: 60px;
+  height: var(--bar-thikness);
+  background: var(--hangman-clr);
+  position: absolute;
+  left: 238px;
+  bottom: 92px;
+  transform: rotate(38deg);
+}
+.gameContainer .letters {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.gameContainer .letters span {
+  font-size: 1.2rem;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  color: white;
+  background-color: var(--clr);
+  font-weight: 700;
+  width: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.result {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+  border-radius: 0.5em;
+  background-color: #fafafa;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 10px;
+}
+.result p {
+  font-size: 1.2rem;
+  color: var(--clr);
+  font-weight: 700;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+.result .wordtoGeuss {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wordtoGeuss span {
+  font-size: 2rem;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  color: var(--clr);
+  background-color: white;
+  font-weight: 700;
+  height: 70px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 5px solid var(--clr);
+}
